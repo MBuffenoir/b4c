@@ -1,6 +1,6 @@
 Django<1.9
 psycopg2
-django-grappelli
+#django-grappelli
 django-extensions
 django-smuggler
 drest
