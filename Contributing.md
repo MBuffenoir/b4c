@@ -1,5 +1,6 @@
 #Developer guidelines
 
+##Docker env
 Docker is used to provide a unified development environment.
 You will need docker engine and docker compose to run the project. Mac or Windows developers can use docker machine.
 
@@ -25,6 +26,8 @@ See [https://docs.docker.com] for installation manuals.
 
 	# You can now connect to the admin using:
 	http://<docker-ip>:8000/admin
+
+All changes done in the code are automatically reflected by the django management tools.
 
 ##Docker tips
 
@@ -53,3 +56,11 @@ See [https://docs.docker.com] for installation manuals.
 	# to get the ip address to connect to
 	docker ip b4c
 	```
+
+##Postman
+
+A postman collection is provided to tests the API. Every endpoint must be added in there.
+
+##Django modules
+
+A README.md files must be created a the root of every module.
