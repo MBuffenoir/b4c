@@ -1,4 +1,4 @@
-# Description 
+#Description 
 
 Battle 4 coins (B4C) is a bitcoins monetized starcraft II match platform.
 Users can register and link a Starcraft 2 player profile to their account.
@@ -8,16 +8,16 @@ Match are proposed by the players themselves. They define how much bitcoins they
 The platform propose an escrow service to solve eventual disputes.
 Revenue model is based on a small fee taken on each match (a small percentil).
 
-# Tech stack
+#Tech stack
 
-## Back end
+##Back end
 Django + tastypie are used to create a public API and an admin interface.
 Crossbar will provide real-time communications.
 
-## Front end
+##Front end
 AngularJS create a SPA relying on the API.
 
-# Developer guidelines
+#Developer guidelines
 
 Docker is used to provide a unified development environment.
 You will need docker engine and docker compose to run the project. Mac or Windows developers can use docker machine.
@@ -37,7 +37,7 @@ See [https://docs.docker.com] for installation manuals.
 	# You can now connect to the admin using:
 	http://<docker-ip>:8000/admin
 
-## Docker tips
+##Docker tips
 
 + Install completion on mac
 
