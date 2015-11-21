@@ -41,12 +41,16 @@ See [https://docs.docker.com] for installation manuals.
 
 + Install completion on mac
 
+	```
 	brew install bash-completion
 	curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > /usr/local/etc/bash_completion.d/docker-compose
+	``
 
 + Install completion on linux
 
-	 curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
+	```
+	curl -L https://raw.githubusercontent.com/docker/compose/$(docker-compose --version | awk 'NR==1{print $NF}')/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose
+	```
 
 
 
