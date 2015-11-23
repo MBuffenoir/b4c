@@ -5,8 +5,11 @@ Users can register and link a Starcraft 2 player profile to their account.
 
 Match are proposed by the players themselves. They define how much bitcoins they engage in the match and the winner takes it all.
 
-The platform propose an escrow service to solve eventual disputes.
-Revenue model is based on a small fee taken on each match (a small percentil). It provides for hosting, legals and developer needs.
+The platform propose an escrow service to solve eventual disputes. We use blizzard API to check the match history of the players [https://dev.battle.net/io-docs].
+
+All matches are free to enter.
+
+Revenue can be generated from ads, streams and sponsors. TBD.
 
 #Tech stack
 
