@@ -1,6 +1,6 @@
 #Description 
 
-Battle 4 coins (B4C) is a bitcoins monetized starcraft II match platform.
+Battle 4 coins (B4C) is a bitcoins monetized starcraft II match platform. It could easily be extended to any Blizzard Game and further on to any (video or not) game ...
 Users can register and link a Starcraft 2 player profile to their account.
 
 Match are proposed by the players themselves. They define how much bitcoins they engage in the match pot and the winner takes it all.
@@ -61,6 +61,12 @@ At this point there are two cases:
   - admin select the winner and the first case scenario can be applied. -> Could be automated if number of detected games is == match history and match policy is clearly identifiable (not necessary for the MVP)
   - loser lost dispute number +1 (Bad for his reputation)
 
+### Useful links & softwares
+
+Bitcore
+Electrum
+Bitcoin-core
+[https://coinb.in/]
 
 # License
 
