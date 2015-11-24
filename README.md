@@ -59,7 +59,7 @@ At this point there are two cases:
 - Winner is non legit (Both clicked on `I won the game` button !!):
   - server fetch match history from bizzard API
   - admin select the winner and the first case scenario can be applied. -> Could be automated if number of detected games is == match history and match policy is clearly identifiable (not necessary for the MVP)
-  - loser lost dispute number +1 (Bad for hist reputation)
+  - loser lost dispute number +1 (Bad for his reputation)
 
 
 # License
