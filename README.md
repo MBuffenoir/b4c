@@ -21,6 +21,7 @@ Django templating + autobahn library or AngularJS creates a SPA relying on the A
 # General worflow
 
 ### Players profile
+
 - Starcraft id + name to be able to be located by opponent on the inGame chat system
 - Pot address
 - Receiving bitcoin address

@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+from django.contrib.auth.models import User
+from django.utils import timezone
 
 class PlayerProfile(models.Model):
     """
@@ -17,15 +19,50 @@ class PlayerProfile(models.Model):
     '215000, u'level': 30}, u'protoss': {u'currentLevelXP': 95635, u'totalLevelXP': 225000, u'level': 34}, u'terran':
     '{u'currentLevelXP': 15581, u'totalLevelXP': 65000, u'level': 2}, u'level': 66}, u'clanTag': u'', u'id': 241726}
     """
+    
+    # user_id
+    # display_name
+    # region
+    # total_level (sum of 3 races levels)
+    # clan_name
+    # primary_race
+    # highest_1v1_rank
+    # portrait
+    # profile_path
+    # rank
+    # total_win
+    # total_loss
+    # season_win
+    # season_loss
 
-	user              = models.OneToOneField(User, related_name='profile', null=True)
-	timestamp_created = models.DateTimeField(_('date of creation'), default=timezone.now)
-	timestamp_updated = models.DateTimeField(_('date of update'), default=timezone.now)
-	registration_ip   = models.CharField(max_length=15, default='')
+    player_REGION = (
+        (u'EU', u'Europe'),
+        (u'US', u'Partially executed'),     
+    )
+
+    RACE = (
+        (u'P','Protoss'),
+        (u'Z','Zerg'),
+        (u'T','Terran'),
+    )
+
+    user              = models.OneToOneField(User, related_name='profile', null=True)
+    timestamp_created = models.DateTimeField('date of creation', default=timezone.now)
+    timestamp_updated = models.DateTimeField('date of update', default=timezone.now)
+    player_id         = models.PositiveIntegerField('blizzard player id', null=True, blank=True)
+    display_name      = models.CharField('blizzard player name', max_length=32, null=True, blank=True)
+    region            = models.CharField(max_length=12, choices=player_REGION, default='EU')
+    primary_race      = models.CharField(max_length=12, choices=RACE, default='P')
+    profile_path      = models.CharField('path of the player profile', max_length=64, null=True, blank=True)
+    total_win         = models.PositiveIntegerField(null=True, blank=True)
+    total_loss        = models.PositiveIntegerField(null=True, blank=True)
+    season_win        = models.PositiveIntegerField(null=True, blank=True)
+    season_loss       = models.PositiveIntegerField(null=True, blank=True)
+    registration_ip   = models.CharField(max_length=15, default='')
 
     class Meta:
-        verbose_name        = _('player profile')
-        verbose_name_plural = _('players profiles')
+        verbose_name        = 'player profile'
+        verbose_name_plural = 'players profiles'
 
     def __unicode__(self):
         return self.user.username

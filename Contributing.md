@@ -16,6 +16,7 @@ See [https://docs.docker.com] for installation manuals.
 	docker-compose up -d
 
 	# Create or update database tables
+	docker exec b4c_b4c_1 ./manage.py makemigrations
 	docker exec b4c_b4c_1 ./manage.py migrate
 
 	# Create superuser (Used once)
@@ -50,11 +51,14 @@ All changes done in the code are automatically reflected by the django managemen
 	# to create the env
 	docker-machine create b4c -d virtualbox
 
+	# to start the env
+	docker-machine start b4c
+
 	# to use this env
 	eval "$(docker-machine env b4c)"
 
 	# to get the ip address to connect to
-	docker ip b4c
+	docker-machine ip b4c
 	```
 
 ##Postman
