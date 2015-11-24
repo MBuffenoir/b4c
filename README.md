@@ -34,7 +34,7 @@ Django templating + autobahn library or AngularJS creates a SPA relying on the A
 
 A match is proposed by a registered player. Anyone can propose to be a challenger, the creator of the match review the profile of his proposed opponents and pick one (if there is more than one). Players must agree on a time to play the games (approximation).
 
-We must implement a little search engine for player to find game they are interested in (by pot size, by league, by opponent name, etc ...)
+We must implement a search engine for player to look for games they are interested in (by pot size, by league, by opponent name, etc ...)
 
 - Matches can have the following status: open / pending / cancelled / finished
 
@@ -43,7 +43,7 @@ Once 2 opponents are matched:
 - A new private / pubkey is generated server side (from a master BIP44 seed)
 - A 2 of 3 multisig address is generated using: server-side address, players 1 pot address, player 2 pot address.
 - Each player must send the pot amount to the multisig address (so if proposed pot is of 50mBTC each player sends 50 mBTC)
-- they must add each other as Friend in Game and play their match according to the conditions chosen (Best of 3, 5 ,7).
+- They must add each other as Friend in Game and play their match according to the conditions chosen (Best of 3, 5 ,7).
 - Winner report his match result to the website.
 - Loser has X hours to contest
 
