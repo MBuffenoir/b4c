@@ -1,0 +1,76 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Batte 4 coins{% endblock %}</title>
+
+    {% block header_style %}
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    {% endblock %}
+
+  </head>
+  <body>
+
+    <style type="text/css">
+      body {
+        padding-top: 50px;
+      }
+    </style>
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Battle 4 coins/a>
+        </div>
+        <div class="collapse navbar-collapse">
+          {% if not user.is_authenticated %}
+          <ul class="nav navbar-nav">
+            <li><a href="{% url "wallet_list" %}">My profile</a></li>
+          </ul>
+          <ul class="nav navbar-nav">
+            <li><a href="{% url "pending_orders" %}">My challenges</a></li>
+          </ul>
+          {% else %}
+          <ul class="nav navbar-nav">
+            <li><a href="{% url "balances" %}">Search for challenges</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right header-top">
+             {% if not user.is_authenticated %} 
+              <div class="btn-group"> 
+               <a href="{% url 'account_login' %}" role="button" class="btn btn-default navbar-btn">Login</a>
+              </div>
+             {% else %}
+             <div class="btn-group">
+              <a href="{% url 'account_logout' %}" role="button" class="btn btn-default navbar-btn">Logout</a>
+             </div>
+             {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container" style="padding: 5px;">
+
+      {% block content %}{% endblock %}
+    </div>
+    
+    {% block bottomscript %}{% endblock %}
+  </body>
+</html>
