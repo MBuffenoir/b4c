@@ -35,6 +35,8 @@ A match is proposed by a registered player. Anyone can propose to be a challenge
 
 We must implement a search engine for player to look for games they are interested in (by pot size, by league, by opponent name, etc ...)
 
+As of now, disconnection will be treated as a game loss !
+
 - Matches can have the following status: open / pending / cancelled / finished
 
 Once 2 opponents are matched:
@@ -42,30 +44,22 @@ Once 2 opponents are matched:
 - A new private / pubkey is generated server side (from a master BIP44 seed)
 - A 2 of 3 multisig address is generated using: server-side address, players 1 pot address, player 2 pot address.
 - Each player must send the pot amount to the multisig address (so if proposed pot is of 50mBTC each player sends 50 mBTC)
+- Each player receive a transaction they must sign and upload (Electrum > Load Transaction > sign). This will be used to send them coins once the match winner is decided.
 - They must add each other as Friend in Game and play their match according to the conditions chosen (Best of 3, 5 ,7).
-- Winner report his match result to the website.
-- Loser has X hours to contest
+- The match starts once each players click on startmatch button
 
-At this point there are two cases:
+Once the match has been played and the winner is known.
 
-- Winner is legit:
-  - server creates a tx to the winner receiving address of choice
-  - tx is downloaded in text format by the winner
-  - winner signs the tx with his wallet (Electrum > Load Transaction > sign)
-  - winner upload tx to server
-  - server signs and broadcast tx
-
-- Winner is non legit (Both clicked on `I won the game` button !!):
-  - server fetch match history from bizzard API
-  - admin select the winner and the first case scenario can be applied. -> Could be automated if number of detected games is == match history and match policy is clearly identifiable (not necessary for the MVP)
-  - loser lost dispute number +1 (Bad for his reputation)
+- server fetch match history from bizzard API and set the winner of the match.
+- server sign a tx to the winner receiving address of choice
+- server broadcast tx
 
 ### Useful links & softwares
 
-Bitcore
-Electrum
-Bitcoin-core
-[https://coinb.in/]
++ Bitcore
++ Electrum
++ Bitcoin-core
++ [https://coinb.in/]
 
 # License
 
