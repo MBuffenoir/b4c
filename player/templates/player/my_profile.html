@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Your Blizzard profile</h2>
+    
+    
+    <div class="profile">
+        {% if profile.display_name %}
+            <a class="btn" href="{% url 'profile_update' %}">Change my blizzard player infos</a>
+            <p>{{ profile.display_name }}</p>
+            <p>{{ profile.player_id }}</p>
+        {% else %}
+            <a class="btn" href="{% url 'profile_update' %}">Set my blizzard player infos</a>
+        {% endif %}
+    </div>
+{% endblock %}

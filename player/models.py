@@ -66,7 +66,26 @@ class PlayerProfile(models.Model):
         return reverse('profile', kwargs={'pk': self.pk})
 
     def __str__(self):
-        # return self.user.username
-        return self.display_name
-
-
+        return self.user.username
+        
+def create_player_profile(sender, **kwargs):
+        """
+        A signal for hooking up automatic ``PlayerProfile`` creation.
+        """
+        if kwargs.get('created') is True:
+            PlayerProfile.objects.create(user=kwargs.get('instance'))
+#===========================================================================
+# SIGNALS
+#===========================================================================
+def signals_import():
+    """ A note on signals.
+     
+    The signals need to be imported early on so that they get registered
+    by the application. Putting the signals here makes sure of this since
+    the models package gets imported on the application startup.
+    """
+     
+    models.signals.post_save.connect(create_player_profile, sender=User)
+    #this is breaking things right now models.signals.post_save.connect(create_goldorauth, sender=User)
+ 
+signals_import()
