@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class PlayerProfile(models.Model):
     """
-    This class is where all the informations related to a player are centralized
+    This class is where all the informations related to a player are set. 
 
     informations available from blizzard player profile (from their API):
     
@@ -58,12 +58,11 @@ class PlayerProfile(models.Model):
     total_loss        = models.PositiveIntegerField(null=True, blank=True)
     season_win        = models.PositiveIntegerField(null=True, blank=True)
     season_loss       = models.PositiveIntegerField(null=True, blank=True)
-    registration_ip   = models.CharField(max_length=15, default='')
 
     class Meta:
         verbose_name        = 'player profile'
         verbose_name_plural = 'players profiles'
 
-    def __unicode__(self):
+    def __str__(self):
         return self.user.username
 

@@ -10,13 +10,14 @@
 
     {% block header_style %}
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"  crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
     {% endblock %}
 
   </head>
@@ -37,20 +38,21 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Battle 4 coins/a>
+          <a class="navbar-brand" href="/">Battle 4 coins</a>
         </div>
         <div class="collapse navbar-collapse">
           {% if not user.is_authenticated %}
           <ul class="nav navbar-nav">
-            <li><a href="{% url "wallet_list" %}">My profile</a></li>
+            <li><a href="">My profile</a></li>
           </ul>
           <ul class="nav navbar-nav">
-            <li><a href="{% url "pending_orders" %}">My challenges</a></li>
+            <li><a href="">My challenges</a></li>
           </ul>
-          {% else %}
+          {% endif %}
           <ul class="nav navbar-nav">
-            <li><a href="{% url "balances" %}">Search for challenges</a></li>
+            <li><a href="">Search for challenges</a></li>
           </ul>
+
           <ul class="nav navbar-nav navbar-right header-top">
              {% if not user.is_authenticated %} 
               <div class="btn-group"> 
