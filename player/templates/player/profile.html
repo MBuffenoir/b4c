@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Your Blizzard profile</h1>
+    <div class="profile">
+        <p>{{ profile.display_name }}</p>
+        <p>{{ profile.player_id }}</p>
+    </div>
+{% endblock %}

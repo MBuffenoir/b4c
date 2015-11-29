@@ -1,6 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.utils import timezone
 
@@ -63,6 +62,11 @@ class PlayerProfile(models.Model):
         verbose_name        = 'player profile'
         verbose_name_plural = 'players profiles'
 
+    def get_absolute_url(self):
+        return reverse('profile', kwargs={'pk': self.pk})
+
     def __str__(self):
-        return self.user.username
+        # return self.user.username
+        return self.display_name
+
 
