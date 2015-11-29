@@ -100,7 +100,7 @@ DATABASES = {
 # Django All auth settings
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-ACCOUNT_LOGIN_REDIRECT_URL = '/'
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

@@ -41,7 +41,7 @@
           <a class="navbar-brand" href="/">Battle 4 coins</a>
         </div>
         <div class="collapse navbar-collapse">
-          {% if not user.is_authenticated %}
+          {% if user.is_authenticated %}
           <ul class="nav navbar-nav">
             <li><a href="">My profile</a></li>
           </ul>
