@@ -1,10 +1,10 @@
-# How to install a web app on a swarm cluster on google compute engine (GCE)
+#How to install a web app on a swarm cluster on google compute engine (GCE)
 
 We use:
 docker engine / machine / compose / hub
 gcloud command line tool
 
-## Setting up google cloud
+##Setting up google cloud
 
 We will use gcloud, a tool by google to manage instances in our google cloud engine account. Let's install it and login with:
 
@@ -14,7 +14,9 @@ We will use gcloud, a tool by google to manage instances in our google cloud eng
 Select a project > create project. From now in we will use this project ID
 
     $ export PROJECT_ID=<your-project-id>
-    $ gcloud config set project $PROJECT_ID 
+    $ gcloud config set project $PROJECT_ID
+
+##Setting up the Swaaaaaaaarm
 
 First we will generate our swarm token on our local machine with:
 
