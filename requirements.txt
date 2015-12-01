@@ -1,8 +1,11 @@
 Django<1.9
 psycopg2
-# django-tastypie
-# django-tastycrust
 django-allauth
 django-extensions
 django-smuggler
+crossbar
+txCelery
+django-celery
 drest
+future
+setproctitle

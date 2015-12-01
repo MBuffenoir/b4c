@@ -1,0 +1,17 @@
+{
+   "pid": 1, 
+   "options": {
+      "reactor": null, 
+      "loglevel": "info", 
+      "logtofile": false, 
+      "logformat": "colour", 
+      "command": "start", 
+      "logdir": null, 
+      "config": "/app/.crossbar/config.json", 
+      "cbdir": "/app/.crossbar"
+   }, 
+   "argv": [
+      "/usr/local/bin/crossbar", 
+      "start"
+   ]
+}

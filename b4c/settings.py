@@ -103,6 +103,47 @@ ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
 
+# ----------------- CROSSTALK -----------------#
+
+CROSSBAR_DOMAIN = 'com.example'
+
+CROSSBAR_CELERY_TASKS = []
+# {'app': 'demoapp.tasks', 'task': 'example_celery_task', 'cb_rpc': 'call_celery_task'},
+# {'app': 'demoapp.tasks', 'task': 'example_celery_task', 'cb_rpc': 'call_authenticated_celery_task'},
+# ]
+
+GET_LIST_DATA_TASKS = []
+
+GET_DETAIL_DATA_TASKS = []
+
+CREATE_DATA_TASKS = []
+
+# ----------------- CELERY -----------------#
+import djcelery
+
+CELERY_ACCEPT_CONTENT = ['json', 'pickle'] #pickle needed for some reason
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+djcelery.setup_loader()
+
+## Broker settings.
+BROKER_URL = 'amqp://guest:guest@rabbitmq:5672//'
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+
+# CELERY Periodic tasks
+
+# CELERYBEAT_SCHEDULE = {
+#     # crontab(hour=0, minute=0, day_of_week='saturday')
+#     'update_openexchange_rates_task': {
+#         'task': 'exchange_rates.tasks.update_openexchange_rates_task', 
+#         'schedule': crontab(minute='*/10')
+#     },
+#     }
+
+
+# }
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 

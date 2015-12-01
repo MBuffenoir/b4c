@@ -2,6 +2,7 @@
 # -*- encoding: utf-8 -*-
 
 import os, drest
+from __future__ import print_function
 
 # To debug one can do in his shell: 
 # export DREST_DEBUG=1
@@ -11,7 +12,7 @@ import os, drest
 class BlizzardApi:
 
     def __init__(self, apikey, region='eu'):
-        self.baseurl = "https://" + region + ".api.battle.net"
+        self.baseurl = 'https://%s.api.battle.net' % region
         self.apikey  = apikey
 
     def get_player_profile(self, id, name):
@@ -25,7 +26,7 @@ class BlizzardApi:
         self.api = drest.api.API(self.baseurl, ignore_ssl_validation=False, trailing_slash=True)
 
         try:
-            r = self.api.make_request('GET', '/sc2/profile/'+str(id)+'/'+'1/'+name+'/', params=dict(locale='en_GB', apikey=self.apikey))
+            r = self.api.make_request('GET', '/sc2/profile/%s/1/%s/' %(id,name), params=dict(locale='en_GB', apikey=self.apikey))
             if r.status != 200 and r.status != 201:
                 return False
             return r.data
@@ -41,7 +42,7 @@ class BlizzardApi:
         self.api = drest.api.API(self.baseurl, ignore_ssl_validation=False, trailing_slash=False)
 
         try:
-            r = self.api.make_request('GET', '/sc2/profile/'+str(id)+'/'+'1/'+name+'/matches', params=dict(apikey=self.apikey, locale='en_GB'))        
+            r = self.api.make_request('GET', '/sc2/profile/%s/1/%s/matches' %(id,name), params=dict(apikey=self.apikey, locale='en_GB'))        
             print(r.status)
             if r.status != 200 and r.status != 201:
                 return False
@@ -58,7 +59,7 @@ class BlizzardApi:
         self.api = drest.api.API(self.baseurl, ignore_ssl_validation=False, trailing_slash=False)
 
         try:
-            r = self.api.make_request('GET', '/sc2/profile/'+str(id)+'/'+'1/'+name+'/ladders', params=dict(locale='en_GB', apikey=self.apikey))
+            r = self.api.make_request('GET', '/sc2/profile/%s/1/%s/matches/ladders' %(id,name), params=dict(locale='en_GB', apikey=self.apikey))
             if r.status != 200 and r.status != 201:
                 return False
             return r.data
@@ -69,16 +70,16 @@ class BlizzardApi:
 
 # exemples
 
-B = BlizzardApi(os.environ['APIKEY'])
+# B = BlizzardApi(os.environ['APIKEY'])
 
-result = B.get_player_profile(241726, 'LaLu')
+# result = B.get_player_profile(241726, 'LaLu')
 
-print(result)
+# print(result)
 
-result = B.get_player_match_history(241726, 'LaLu')
+# result = B.get_player_match_history(241726, 'LaLu')
 
-print(result)
+# print(result)
 
-result = B.get_player_ladders(241726, 'LaLu')
+# result = B.get_player_ladders(241726, 'LaLu')
 
-print(result)
+# print(result)

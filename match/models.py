@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django.db import models
 
 from player.models import PlayerProfile
@@ -20,7 +21,7 @@ class Match(models.Model):
 
     match_REGION = (
         (u'EU', u'Europe'),
-        (u'US', u'Partially executed'),     
+        (u'NA', u'North America'),     
     )
 
     TYPE = (
@@ -39,13 +40,24 @@ class Match(models.Model):
         (u'RvR','Random versus Random'),
     )
 
+    FORMAT = (
+        ('BO1','Best of 1'),
+        ('BO3','Best of 3'),
+        ('BO5','Best of 5'),
+        ('BO7','Best of 7'),
+    )
+
     owner             = models.ForeignKey(PlayerProfile, related_name='player', null=True)
+    challenger        = models.ForeignKey(PlayerProfile, related_name='challenger', null=True)
+    winner            = models.ForeignKey(PlayerProfile, related_name='winner', null=True)
     timestamp_created = models.DateTimeField('Date of creation', default=timezone.now)
     timestamp_updated = models.DateTimeField('Date of update', default=timezone.now)
     name              = models.CharField('Name of the game', max_length=64, null=True, blank=True)
     region            = models.CharField(max_length=12, choices=match_REGION, default='EU')
     type              = models.CharField(max_length=12, choices=TYPE, default='RvR')
+    match_format      = models.CharField(max_length=12, choices=FORMAT, default='BO3')
     pot               = models.PositiveIntegerField('Pot amount in mBTC', default=0)
+    played            = models.BooleanField('has the match been played yet ?', default=False)
 
     class Meta:
         verbose_name        = 'match'
