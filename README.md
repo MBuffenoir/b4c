@@ -13,6 +13,7 @@ All matches are free to enter.
 
 ##Back end
 Django is used to create the web back end and an admin interface.
+Nodejs with bitcore are used to handle bitcoins.a
 Crossbar will serve normal web requests and websockets.
 
 ##Front end
