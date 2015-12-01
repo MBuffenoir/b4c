@@ -41,7 +41,7 @@ To connect to the master use:
     
     $ docker-machine ssh swarm-master
 
-And enter our env:
+And enter our env (note the --swarm`):
 
     $ eval $(docker-machine env --swarm swarm-master)
 
@@ -79,6 +79,24 @@ You can then test the nodes instances by connection to them with:
 
     $ docker-machine ssh swarm-agent0
     $ docker-machine ssh swarm-agent1
+
+##Networking
+
+In order to use the docker 1.9 networking capabilities we need to modify our docker-engine options:
+
+    $ docker-machine ssh swarm-master
+    $ sudo vi /etc/default/docker
+
+Add the following options: 
+
+    --cluster-store
+    --cluster-advertise
+
+Restart your docker engine with:
+
+    $ sudo service docker restart
+
+TODO: We should be able to provision this from the start with GCE startup-scripts.
 
 From this point you can run docker-compose up -d from your laptop to see your cluster being populated with containers :-)
 
