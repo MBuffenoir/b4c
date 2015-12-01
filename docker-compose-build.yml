@@ -1,0 +1,17 @@
+db:
+  image: postgres
+
+rabbitmq:
+    image: rabbitmq
+
+b4c:
+  build: .
+  command: crossbar start
+  volumes:
+    - .:/app
+  ports:
+    - "8080:8080"
+  links:
+    - db
+    - rabbitmq
+
