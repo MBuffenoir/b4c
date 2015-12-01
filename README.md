@@ -12,11 +12,11 @@ All matches are free to enter.
 #Tech stack
 
 ##Back end
-Django (+ tastypie eventually) is used to create a public API and an admin interface.
-Crossbar will provide real-time communications.
+Django is used to create the web back end and an admin interface.
+Crossbar will serve normal web requests and websockets.
 
 ##Front end
-Django templating + autobahn library or AngularJS creates a SPA relying on the API.
+Django templating + autobahn library.
 
 # General worflow
 
