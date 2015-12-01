@@ -14,3 +14,5 @@ RUN pip install -r requirements.txt
 RUN python /app/manage.py collectstatic --noinput
 
 EXPOSE 8080
+
+CMD ["python","manage.py","runserver","0.0.0.0:8080"]
