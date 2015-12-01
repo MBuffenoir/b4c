@@ -5,7 +5,7 @@ rabbitmq:
     image: rabbitmq
 
 b4c:
-  build: .
+  image: battle4coins/b4c
   command: crossbar start
   volumes:
     - .:/app
