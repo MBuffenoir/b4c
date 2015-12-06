@@ -4,14 +4,15 @@
 db:
   image: postgres
 
-# rabbitmq:
-#     image: rabbitmq
+rabbitmq:
+    image: rabbitmq
 
 b4c:
   image: lalu/b4c
   command: crossbar start
   environment:
     - POSTGRES_URI=b4c_db_1
+    - RABBITMQ_URI=b4c_rabbitmq_1
   # volumes:
   #   - .:/app
   ports:

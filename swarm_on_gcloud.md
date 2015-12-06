@@ -1,7 +1,7 @@
 #How to install a web app on a swarm cluster on google compute engine (GCE)
 
 We use:
-docker engine / machine / compose / hub
+docker engine (>= 1.9) / machine / compose / hub
 gcloud command line tool
 
 ##Setting up google cloud
@@ -64,7 +64,7 @@ Here I got an issue, the machine swarm port were not opened correctly on the GCE
 
     gcloud compute firewall-rules create swarm-machines --allow tcp:3376 --source-ranges 0.0.0.0/0 --target-tags docker-machine --project $PROJECT_ID
 
-After this I could use the machine env without issue.
+After this I could use the `docker-machine env` command without issue.
 
 ###Creating a swarm node
 
@@ -92,12 +92,16 @@ Or from the swarm master list the machine registered on consul:
 
     $ docker run swarm list consul://$(docker-machine ip consul-master):8500
 
-##Networking
+###Networking
 
+Using the new --x-networking argument of the docker-compose command we can now create an overlay network, that will be used by all the container describe in our compose file:
 
-TODO: We should be able to provision this from the start with GCE startup-scripts.
+    docker-compose --x-networking up -d 
 
-From this point you can run docker-compose up -d from your laptop to see your cluster being populated with containers :-)
+##Scaling
+
+    docker-compose scale=3 app
+    docker-compose up --force-recreate -d
 
 
 
