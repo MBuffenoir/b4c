@@ -6,12 +6,13 @@ rabbitmq:
 
 b4c:
   build: .
-  command: crossbar start
+  command: python ./manage.py runserver 0.0.0.0:8080
+  # command: crossbar start
   volumes:
     - .:/app
   ports:
     - "8080:8080"
   links:
     - db
-    - rabbitmq
+    # - rabbitmq
 

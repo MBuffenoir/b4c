@@ -1,15 +1,21 @@
+# On a swarm cluster you can start this composition with
+# docker-compose -f docker-compose-swarm.yml --x-networking up -d
+
 db:
   image: postgres
 
-rabbitmq:
-    image: rabbitmq
+# rabbitmq:
+#     image: rabbitmq
 
 b4c:
   image: lalu/b4c
   command: crossbar start
-  volumes:
-    - .:/app
+  environment:
+    - POSTGRES_URI=b4c_db_1
+  # volumes:
+  #   - .:/app
   ports:
     - "8080:8080"
+
 
 

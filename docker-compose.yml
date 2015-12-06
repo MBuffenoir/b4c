@@ -1,12 +1,13 @@
 db:
   image: postgres
 
-rabbitmq:
-    image: rabbitmq
+# rabbitmq:
+#     image: rabbitmq
 
 b4c:
   image: lalu/b4c
   command: crossbar start
+  # command: python manage.py runserver 0.0.0.0:8080
   volumes:
     - .:/app
   ports:

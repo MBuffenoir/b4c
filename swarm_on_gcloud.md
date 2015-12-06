@@ -14,27 +14,42 @@ We will use gcloud, a tool by google to manage instances in our google cloud eng
 Select a project > create project. From now in we will use this project ID
 
     $ export PROJECT_ID=<your-project-id>
-    $ gcloud config set project $PROJECT_ID
 
 ##Setting up the Swaaaaaaaarm
 
-First we will generate our swarm token on our local machine with:
+###Creating a discovery service on a machine out of the cluster
 
-    $ docker run swarm create
+    $ docker-machine create --driver google \
+        --google-project  \
+        --google-zone europe-west1-b \
+        --google-machine-type f1-micro \
+        consul-master
 
-Write dowm the token returned by this command and put it in an ENV variable:
+Connect to it:
 
-    $ export SWARM_TOKEN=<token>
+    $ eval $(docker-machine env consul-master)
 
-We need some instances on which to install swarm. Let's first creat the master with:
+Start consul with:
+
+    $ docker run --name consul-master --restart=always -p 8500:8500 -d progrium/consul -server -bootstrap -ui-dir /ui
+
+Finally add a firewall rule to allow our swarm node to communicate with the consul server on the port 8500:
+    
+    $ gcloud compute --project $PROJECT_ID firewall-rules create "consul" --allow tcp:8500  --network "default" --source-tags "docker-machine"
+
+###Creating the swarm master
+
+We need instances on which to install swarm. Let's first create the master with:
     
     $ docker-machine create --driver google \
         --google-project $PROJECT_ID \
         --google-zone europe-west1-b \
-        --google-machine-type f1-micro \
+        --google-machine-type n1-standard-1  \
         --swarm \
         --swarm-master \
-        --swarm-discovery token://$SWARM_TOKEN \
+        --swarm-discovery="consul://$(docker-machine ip consul-master):8500" \
+        --engine-opt="cluster-store=consul://$(docker-machine ip consul-master):8500" \
+        --engine-opt="cluster-advertise=eth0:2376" \
         swarm-master
 
 To connect to the master use:
@@ -45,31 +60,25 @@ And enter our env (note the --swarm`):
 
     $ eval $(docker-machine env --swarm swarm-master)
 
-Here I got an issue, the machine port were not opened correctly on the GCE firewall, this solved the issue (See [https://github.com/docker/machine/issues/1432]):
+Here I got an issue, the machine swarm port were not opened correctly on the GCE firewall, this solved the issue (See [https://github.com/docker/machine/issues/1432]):
 
     gcloud compute firewall-rules create swarm-machines --allow tcp:3376 --source-ranges 0.0.0.0/0 --target-tags docker-machine --project $PROJECT_ID
 
 After this I could use the machine env without issue.
 
-Now, we are going to creato two swarm nodes with
+###Creating a swarm node
 
     $ docker-machine create --driver google \
         --google-project $PROJECT_ID  \
-        --google-zone europe-west1-c \
+        --google-zone europe-west1-b \
         --google-machine-type n1-standard-1 \
         --swarm \
-        --swarm-discovery token://$SWARM_TOKEN \
-        swarm-node-0
-
-and
-
-    $ docker-machine create --driver google \
-        --google-project $PROJECT_ID  \
-        --google-zone europe-west1-d \
-        --google-machine-type n1-standard-1 \
-        --swarm \
-        --swarm-discovery token://$SWARM_TOKEN \
+        --swarm-discovery="consul://$(docker-machine ip consul-master):8500" \
+        --engine-opt="cluster-store=consul://$(docker-machine ip consul-master):8500" \
+        --engine-opt="cluster-advertise=eth0:2376" \
         swarm-node-1
+
+Of course you can create as many nodes as needed.
 
 More driver option are available: [https://docs.docker.com/machine/drivers/gce/].
 
@@ -77,24 +86,14 @@ Change the machine-type according to your needs / budget.
 
 You can then test the nodes instances by connection to them with:
 
-    $ docker-machine ssh swarm-agent0
-    $ docker-machine ssh swarm-agent1
+    $ docker-machine ssh swarm-node-1
+
+Or from the swarm master list the machine registered on consul:
+
+    $ docker run swarm list consul://$(docker-machine ip consul-master):8500
 
 ##Networking
 
-In order to use the docker 1.9 networking capabilities we need to modify our docker-engine options:
-
-    $ docker-machine ssh swarm-master
-    $ sudo vi /etc/default/docker
-
-Add the following options: 
-
-    --cluster-store
-    --cluster-advertise
-
-Restart your docker engine with:
-
-    $ sudo service docker restart
 
 TODO: We should be able to provision this from the start with GCE startup-scripts.
 
