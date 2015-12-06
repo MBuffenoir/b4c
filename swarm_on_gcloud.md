@@ -100,7 +100,7 @@ Using the new --x-networking argument of the docker-compose command we can now c
 
 ##Scaling
 
-    docker-compose scale=3 app
+    docker-compose scale=3 <app name>
     docker-compose up --force-recreate -d
 
 
