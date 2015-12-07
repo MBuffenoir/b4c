@@ -21,7 +21,7 @@ Django templating + autobahn library.
 
 # General worflow
 
-### Players profile
+###Players profile
 
 - Starcraft id + name to be able to be located by opponent on the inGame chat system
 - Pot address
@@ -30,7 +30,7 @@ Django templating + autobahn library.
 - Number of games played
 - Lost dispute number (updated by the site admin) -> A user with many games played and a low lost dispute should be a reliable opponent.
 
-### Matches
+###Matches
 
 A match is proposed by a registered player. Anyone can propose to be a challenger, the creator of the match review the profile of his proposed opponents and pick one (if there is more than one). Players must agree on a time to play the games (approximation).
 
@@ -55,14 +55,18 @@ Once the match has been played and the winner is known.
 - server sign a tx to the winner receiving address of choice
 - server broadcast tx
 
-### Useful links & softwares
+###Useful links & softwares
 
 + Bitcore
 + Electrum
 + Bitcoin-core
 + [https://coinb.in/]
 
-# License
+###Competitors
+
++ https://www.leet.gg
+
+#License
 
 MIT
 
