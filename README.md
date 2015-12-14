@@ -65,6 +65,7 @@ Once the match has been played and the winner is known.
 ###Competitors
 
 + https://www.leet.gg
++ https://www.esportgaming.com/ (somewhat for later phases)
 
 #License
 
